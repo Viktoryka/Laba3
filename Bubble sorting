@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#define size 10
+void bubble_sort(int numbers[]);
+
+int main()
+ {
+  int numbers[size];
+  srand(time(NULL));
+  for (int q = 0; q < size; q++) 
+  {
+    numbers[q] = rand() % 400 - 200 ;
+    printf("%d ", numbers[q]);
+  }
+  printf("\n");
+  
+  bubble_sort(numbers);
+  for (int q = 0; q < size; q++)
+  {
+    printf("%d ", numbers[q]);
+  }
+  
+  return 0;
+}
+
+void bubble_sort(int numbers[])
+{
+  for (int i = 0; i < size - 1; i++)
+  {
+    for (int q = 0; q < size - i - 1; q++)
+    {
+      if (numbers[q] > numbers[q + 1])
+      {
+        numbers[q]     = numbers[q] + numbers[q + 1];
+        numbers[q + 1] = numbers[q] - numbers[q + 1];
+        numbers[q]     = numbers[q] - numbers[q + 1]; 
+      }
+    }
+  }
+}
