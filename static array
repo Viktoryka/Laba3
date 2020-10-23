@@ -1,0 +1,92 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define size 10
+
+int maximum(int static_array[]);
+int minimal(int static_array[]);
+double mean(int static_array[]);
+int median(int static_array[]);
+
+int main() 
+{
+  int static_array[size];
+  srand(time(NULL));
+  for (int q = 0; q < size; q++) 
+  {
+    static_array[q] = rand() % 201 - 100;
+    printf("%d ", static_array[q]);
+  }
+  printf("\n");
+  printf("Максимальное число = %d\n", maximum(static_array));
+  printf("Минимальное число = %d\n", minimal(static_array));
+  printf("Среднее арифметическое = %.2lf\n", mean(static_array));
+  printf("Медиана = %d", median(static_array));
+  
+  return 0;
+}
+
+int maximum(int static_array[])
+{
+  int maximum = static_array[0];
+  for (int i = 1; i < size; i++)
+  {
+    if (static_array[i] > maximum)
+    {
+      maximum = static_array[i];
+    }
+  }
+  
+  return maximum;
+}
+
+int minimal(int static_array[])
+{
+  int minimal = static_array[0];
+  for (int i = 1; i < size; i++)
+  {
+    if (static_array[i] < minimal)
+    {
+      minimal = static_array[i];
+    }
+  }
+
+   return minimal;
+}
+
+double mean(int static_array[])
+{
+  double mean = 0;
+  for (int i = 0; i < size; i++)
+  {
+    mean += static_array[i];
+  }
+
+  return mean / size;
+}
+
+int median(int static_array[])
+{
+   for (int i = 0; i < size - 1; i++)
+  {
+    for (int q = 0; q < size - i - 1; q++)
+    {
+      if (static_array[q] > static_array[q + 1])
+      {
+        static_array[q]     = static_array[q] + static_array[q + 1];
+        static_array[q + 1] = static_array[q] - static_array[q + 1];
+        static_array[q]     = static_array[q] - static_array[q + 1]; 
+      }
+    }
+  }
+  if (size % 2 != 0)
+  {
+    return static_array[size/2];
+  }
+  else
+  {
+    return (static_array[size/2] + static_array[size/2 - 1]) / 2;
+  }
+}
+  
